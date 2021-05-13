@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const db = require('./config');
 
-const url = `mongodb+srv://javonheng:javonheng@smarteventorganizer.okapp.mongodb.net/expense?retryWrites=true&w=majority`;
+const url = db.mongodb;
 
 const connectionParams={
     useNewUrlParser: true,
