@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const db = require('./config');
+// const db = require('./config');
 
-const url = process.env.MONGODB || db.mongodb;
+//|| db.mongodb
+const url = process.env.MONGODB ;
 
 const connectionParams={
     useNewUrlParser: true,
