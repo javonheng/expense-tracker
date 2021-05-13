@@ -11,7 +11,7 @@ async function loginUser(credentials) {
         .then(res => console.log(res.data));
 }
 
-function Login({ setToken, setUser, createFirstExpense }) {
+function SignUp({ createFirstExpense }) {
 
     const history = useHistory();
     const { Title } = Typography;
@@ -88,4 +88,4 @@ function Login({ setToken, setUser, createFirstExpense }) {
     );
 }
 
-export default Login;
+export default SignUp;

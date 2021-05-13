@@ -12,30 +12,20 @@ function Login({ setToken, setUser, setExpense }) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
-    const searchUserFromDBAndGetExpense = () => {
-        axios.get('/api/get/' + username)
-          .then(res => {
-            setExpense(res.data.expense[0].expense);
-          })
-          .catch(err => console.log("no user found"));
-      }
-
     const handleSubmit = async e => {
-        // e.preventDefault();
+        e.preventDefault();
         await axios.post('/api/getUser/', {
             user: username,
-            pass: password
+            password: password
         })
             .then(res => {
                 setToken(res.data.token);
                 setUser(res.data.user.user);
             })
-            .catch(err => history.push('/signup'));
-        searchUserFromDBAndGetExpense();
+            .catch(err => {
+                alert(err.response.data.user);
+                window.location.reload();
+            });
         history.push('/expense');
     }
 
@@ -48,12 +38,10 @@ function Login({ setToken, setUser, setExpense }) {
         <Title style={{marginTop: 50}}>LOGIN</Title>
             <Card style={{ width: '50vw', margin: "auto" }}>
                 <Form
-                name="basic"
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={handleSubmit}
-                onFinishFailed={onFinishFailed}
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
                 >
                     <Form.Item
                         label="Username"
@@ -88,8 +76,8 @@ function Login({ setToken, setUser, setExpense }) {
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                        Log In
+                        <Button type="primary" onClick={handleSubmit}>
+                            Log In
                         </Button>
                     </Form.Item>
                 </Form>
