@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import './App.css';
 import Login from './Login';
 import Expense from './Expense';
@@ -17,15 +17,6 @@ function App() {
         expense: 0
     })
   }
-
-  // function to guard the component for private access
-  // const authGuard = (Component) => () => {
-  //   return token ? (
-  //     <Component />
-  //   ) : (
-  //     <Redirect to="/login" />
-  //   );
-  // };
 
   if (!token) {
     return (
